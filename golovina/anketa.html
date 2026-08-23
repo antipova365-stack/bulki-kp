@@ -12,43 +12,66 @@
 :root{
   --bg:#F6F1E6; --surface:#FFFFFF; --ink:#241A12; --ink-soft:#6E6255;
   --line:#E6DACB; --accent:#BE6A2F; --accent-soft:#F1E1CC;
-  --dark-bg:#1E140D; --dark-ink:#F3E9D8;
+  --dark-bg:#1E140D; --dark-ink:#F3E9D8; --dark-line:#3B2C1F;
   --r:16px; --shadow:0 14px 44px rgba(36,26,18,.10);
   --font:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto}
+p,li,h1,h2,h3,label{overflow-wrap:break-word;word-break:normal}
 .wrap{max-width:760px;margin:0 auto;padding:0 22px}
-header{padding:56px 0 40px}
+header{padding:56px 0 40px;text-align:center}
+header .logo{margin-left:auto;margin-right:auto}
+header .lead{margin-left:auto;margin-right:auto}
+header .note{text-align:left}
 h1{font-size:clamp(28px,5.4vw,42px);font-weight:700;line-height:1.15;
   letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
-.lead{font-size:clamp(17px,2.4vw,20px);color:var(--ink-soft);max-width:54ch;margin:0 0 14px}
+.lead{font-size:clamp(17px,2.4vw,20px);color:var(--ink-soft);max-width:54ch;margin:0 0 14px;text-wrap:pretty}
 .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--accent);font-weight:700;margin-bottom:14px}
 .note{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
   padding:22px 24px;box-shadow:var(--shadow);margin:28px 0 8px}
-.note p{margin:0 0 10px}
+.note p{margin:0 0 10px;text-wrap:pretty}
 .note p:last-child{margin:0}
 .block{padding:34px 0;border-top:1px solid var(--line)}
 h2{font-size:clamp(20px,3vw,26px);font-weight:650;letter-spacing:-.01em;margin:0 0 6px}
-.hint{color:var(--ink-soft);font-size:15px;margin:0 0 20px}
-ol{counter-reset:q;list-style:none;margin:0;padding:0}
-ol li{counter-increment:q;position:relative;padding:0 0 20px 48px;margin:0}
-ol li::before{content:counter(q);position:absolute;left:0;top:1px;
-  width:32px;height:32px;border-radius:100px;background:var(--accent-soft);
-  color:var(--accent);font-weight:700;font-size:14px;
-  display:flex;align-items:center;justify-content:center}
-ol li .sub{display:block;color:var(--ink-soft);font-size:15px;margin-top:4px}
-.last{background:var(--dark-bg);color:var(--dark-ink);border-radius:var(--r);
-  padding:34px 28px;margin:40px 0}
-.last h2{margin-bottom:8px}
-.last .hint{color:#B9A98C}
-.last ol li::before{background:#3B2C1F;color:#D89358}
-footer{padding:38px 0 56px;color:var(--ink-soft);font-size:14px;border-top:1px solid var(--line)}
+.hint{color:var(--ink-soft);font-size:15px;margin:0 0 20px;text-wrap:pretty}
 
-.logo{display:block;width:170px;height:auto;margin:0 0 22px -8px}
-@media(max-width:600px){.logo{width:140px;margin-left:-6px}}
+/* вопрос = подпись + поле */
+.q{position:relative;padding:0 0 26px 48px}
+.q .n{position:absolute;left:0;top:1px;width:32px;height:32px;border-radius:100px;
+  background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:14px;
+  display:flex;align-items:center;justify-content:center}
+.q label{display:block;margin-bottom:10px;cursor:pointer}
+.q .sub{display:block;color:var(--ink-soft);font-size:15px;margin-top:4px}
+textarea,input[type=text]{width:100%;font-family:inherit;font-size:16px;line-height:1.5;
+  color:var(--ink);background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;padding:13px 14px;resize:vertical;-webkit-appearance:none}
+textarea{min-height:78px}
+textarea:focus,input[type=text]:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+@media(max-width:420px){.q{padding-left:0}.q .n{position:static;margin-bottom:8px}}
+
+.dark-block{background:var(--dark-bg);color:var(--dark-ink);border-radius:var(--r);
+  padding:34px 28px;margin:40px 0}
+.dark-block h2{margin-bottom:8px}
+.dark-block .hint{color:#B9A98C}
+.dark-block .q .n{background:#3B2C1F;color:#D89358}
+.dark-block textarea{background:#2A1D14;border-color:var(--dark-line);color:var(--dark-ink)}
+
+.btn{display:inline-block;padding:16px 34px;border:0;border-radius:100px;
+  background:var(--accent);color:#fff;font-family:inherit;font-weight:600;font-size:16px;
+  cursor:pointer;-webkit-appearance:none}
+.btn:disabled{opacity:.5;cursor:default}
+.saved{font-size:14px;color:var(--ink-soft);margin-top:14px;min-height:20px}
+.done{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:28px 26px;box-shadow:var(--shadow);margin:20px 0}
+.done h2{margin-bottom:8px}
+footer{padding:38px 0 56px;color:var(--ink-soft);font-size:14px;border-top:1px solid var(--line)}
+.logo{display:block;width:250px;height:auto;margin:0 0 24px}
+@media(max-width:600px){.logo{width:200px}}
 </style>
 </head>
 <body>
@@ -56,83 +79,219 @@ footer{padding:38px 0 56px;color:var(--ink-soft);font-size:14px;border-top:1px s
 <div class="wrap">
 
 <header>
-  <img class="logo" src="logo.png" alt="BULKI — студия бренд‑дизайна">
-  <div class="eyebrow">для Ольги Головиной‑Панкрашиной</div>
+  <img class="logo" src="logo.png" alt="BULKI — студия бренд-дизайна">
+  <div class="eyebrow">для&nbsp;Ольги Головиной-Панкрашиной</div>
   <h1>Несколько вопросов перед тем, как считать</h1>
-  <p class="lead">Двадцать три коротких вопроса. Займут минут десять&nbsp;— и&nbsp;сэкономят нам обеим целый созвон.</p>
+  <p class="lead">Двадцать три коротких вопроса. Займут минут десять и&nbsp;сэкономят нам обеим целый созвон.</p>
 
   <div class="note">
-    <p><b>Отвечать можно как удобно:</b> текстом, голосовыми, хоть по&nbsp;одному вопросу в&nbsp;день. Ответы «не&nbsp;знаю» и&nbsp;«надо уточнить»&nbsp;— нормальные ответы, они мне тоже говорят многое.</p>
-    <p>Если на&nbsp;какой‑то вопрос отвечать не&nbsp;хочется&nbsp;— пропустите, обсудим голосом.</p>
-    <p class="hint" style="margin-top:14px">Зачем это нужно: без ответов на&nbsp;блоки&nbsp;2 и&nbsp;3 я&nbsp;не&nbsp;смогу назвать честную цену&nbsp;— только угадать. А&nbsp;угаданная цена всегда потом растёт.</p>
+    <p><b>Заполнять можно не&nbsp;за&nbsp;раз.</b> Ответы сохраняются прямо в&nbsp;вашем телефоне: можно закрыть страницу, вернуться завтра и&nbsp;продолжить с&nbsp;того же&nbsp;места. Отправится всё одной кнопкой в&nbsp;самом низу.</p>
+    <p>Ответы «не&nbsp;знаю» и&nbsp;«надо уточнить»&nbsp;— нормальные ответы, они мне тоже говорят многое. Если на&nbsp;какой-то вопрос отвечать не&nbsp;хочется, оставьте поле пустым, обсудим голосом.</p>
+    <p class="hint" style="margin-top:14px">Зачем это нужно: без&nbsp;ответов на&nbsp;блоки 2&nbsp;и&nbsp;3&nbsp;я&nbsp;не&nbsp;смогу назвать честную цену, только угадать. А&nbsp;угаданная цена всегда потом растёт.</p>
   </div>
 </header>
 
+<form id="f" method="post" action="ССЫЛКА_НА_ПРИЁМНИК_ОТВЕТОВ">
+
 <section class="block">
-  <h2>Блок 1. Продукт и цель</h2>
-  <p class="hint">Про то, ради чего всё это.</p>
-  <ol>
-    <li>Что должно измениться в&nbsp;вашей студии через полгода после запуска?</li>
-    <li>Приложение&nbsp;— для существующих учеников или для новых?</li>
-    <li>Сколько учеников сейчас и&nbsp;сколько хотите?</li>
-    <li>Что ученик должен сделать в&nbsp;приложении в&nbsp;первый день?</li>
-    <li>Если бы можно было сделать <b>только одну</b> функцию&nbsp;— какую?</li>
-  </ol>
+  <h2>Как с&nbsp;вами связаться</h2>
+  <p class="hint">Чтобы я&nbsp;знала, куда прислать расчёт.</p>
+  <div class="q">
+    <label for="c1">Имя</label>
+    <input type="text" id="c1" name="Имя" autocomplete="name">
+  </div>
+  <div class="q">
+    <label for="c2">Телефон, почта или ник в&nbsp;мессенджере</label>
+    <input type="text" id="c2" name="Контакт">
+  </div>
+</section>
+
+<section class="block">
+  <h2>Блок 1. Продукт и&nbsp;цель</h2>
+  <p class="hint">Про&nbsp;то, ради чего всё это.</p>
+
+  <div class="q"><div class="n">1</div>
+    <label for="q1">Что должно измениться в&nbsp;вашей студии через полгода после запуска?</label>
+    <textarea id="q1" name="1. Что изменится через полгода"></textarea></div>
+
+  <div class="q"><div class="n">2</div>
+    <label for="q2">Приложение для&nbsp;существующих учеников или для&nbsp;новых?</label>
+    <textarea id="q2" name="2. Для кого приложение"></textarea></div>
+
+  <div class="q"><div class="n">3</div>
+    <label for="q3">Сколько учеников сейчас и&nbsp;сколько хотите?</label>
+    <textarea id="q3" name="3. Сколько учеников сейчас и сколько хотите"></textarea></div>
+
+  <div class="q"><div class="n">4</div>
+    <label for="q4">Что ученик должен сделать в&nbsp;приложении в&nbsp;первый день?</label>
+    <textarea id="q4" name="4. Первый день ученика"></textarea></div>
+
+  <div class="q"><div class="n">5</div>
+    <label for="q5">Если бы&nbsp;можно было сделать <b>только одну</b> функцию, какую?</label>
+    <textarea id="q5" name="5. Единственная функция"></textarea></div>
 </section>
 
 <section class="block">
   <h2>Блок 2. Деньги</h2>
-  <p class="hint">Самый важный блок для расчёта. Отвечайте прямо, я&nbsp;не&nbsp;буду подстраивать цену под цифру&nbsp;— я&nbsp;подберу под неё объём.</p>
-  <ol start="6">
-    <li>Какая вилка бюджета на&nbsp;проект вам комфортна?</li>
-    <li>Оплата из&nbsp;текущей выручки студии или из&nbsp;привлечённых инвестиций?</li>
-    <li>Если инвестор не&nbsp;придёт в&nbsp;ближайшие три месяца&nbsp;— проект продолжается?</li>
-    <li>Какой платёжный сервис уже подключён? Подключены&nbsp;ли автоматические списания по&nbsp;подписке?
-      <span class="sub">Если не&nbsp;знаете&nbsp;— так и&nbsp;напишите, спрошу у&nbsp;вашего бухгалтера.</span></li>
-    <li>Кто ваш бухгалтер и&nbsp;юрист, с&nbsp;кем можно решать вопросы по&nbsp;чекам и&nbsp;договору?</li>
-  </ol>
+  <p class="hint">Самый важный блок для&nbsp;расчёта. Отвечайте прямо: я&nbsp;не&nbsp;буду подстраивать цену под&nbsp;цифру, я&nbsp;подберу под&nbsp;неё объём.</p>
+
+  <div class="q"><div class="n">6</div>
+    <label for="q6">Какая вилка бюджета на&nbsp;проект вам комфортна?</label>
+    <textarea id="q6" name="6. Вилка бюджета"></textarea></div>
+
+  <div class="q"><div class="n">7</div>
+    <label for="q7">Оплата из&nbsp;текущей выручки студии или из&nbsp;привлечённых инвестиций?</label>
+    <textarea id="q7" name="7. Источник оплаты"></textarea></div>
+
+  <div class="q"><div class="n">8</div>
+    <label for="q8">Если инвестор не&nbsp;придёт в&nbsp;ближайшие три месяца, проект продолжается?</label>
+    <textarea id="q8" name="8. Продолжится ли без инвестора"></textarea></div>
+
+  <div class="q"><div class="n">9</div>
+    <label for="q9">Какой платёжный сервис уже подключён? Подключены ли&nbsp;автоматические списания по&nbsp;подписке?
+      <span class="sub">Если не&nbsp;знаете, так и&nbsp;напишите, спрошу у&nbsp;вашего бухгалтера.</span></label>
+    <textarea id="q9" name="9. Платёжный сервис и рекуррент"></textarea></div>
+
+  <div class="q"><div class="n">10</div>
+    <label for="q10">Кто ваш бухгалтер и&nbsp;юрист, с&nbsp;кем можно решать вопросы по&nbsp;чекам и&nbsp;договору?</label>
+    <textarea id="q10" name="10. Бухгалтер и юрист"></textarea></div>
 </section>
 
 <section class="block">
-  <h2>Блок 3. Материалы и права</h2>
-  <p class="hint">Вопрос&nbsp;11&nbsp;— критичный. От&nbsp;ответа зависит, можно&nbsp;ли вообще использовать ваши книги.</p>
-  <ol start="11">
-    <li>Книги вышли в&nbsp;издательстве или самостоятельно? Есть&nbsp;ли договор с&nbsp;издательством?
-      <span class="sub">Если через издательство&nbsp;— нужна копия договора: права на&nbsp;текст могли перейти к&nbsp;нему, и&nbsp;тогда обучать на&nbsp;книгах нельзя.</span></li>
-    <li>Какие материалы уже готовы: тексты, видео, упражнения, разборы?</li>
-    <li>Сколько часов вы&nbsp;готовы уделить погружению? <span class="sub">Мне нужно 6–10&nbsp;часов, разбитых на&nbsp;четыре встречи.</span></li>
-    <li>Есть&nbsp;ли записи, где вы&nbsp;голосом разбираете учеников? Сколько примерно?</li>
-  </ol>
+  <h2>Блок 3. Материалы и&nbsp;права</h2>
+  <p class="hint">Первый вопрос этого блока критичный: от&nbsp;ответа зависит, можно ли&nbsp;вообще использовать ваши книги.</p>
+
+  <div class="q"><div class="n">11</div>
+    <label for="q11">Книги вышли в&nbsp;издательстве или самостоятельно? Есть ли&nbsp;договор с&nbsp;издательством?
+      <span class="sub">Если через издательство, нужна копия договора: права на&nbsp;текст могли перейти к&nbsp;нему, и&nbsp;тогда обучать на&nbsp;книгах нельзя.</span></label>
+    <textarea id="q11" name="11. Права на книги"></textarea></div>
+
+  <div class="q"><div class="n">12</div>
+    <label for="q12">Какие материалы уже готовы: тексты, видео, упражнения, разборы?</label>
+    <textarea id="q12" name="12. Готовые материалы"></textarea></div>
+
+  <div class="q"><div class="n">13</div>
+    <label for="q13">Сколько часов вы&nbsp;готовы уделить погружению?
+      <span class="sub">Мне нужно 6–10&nbsp;часов, разбитых на&nbsp;четыре встречи.</span></label>
+    <textarea id="q13" name="13. Часы на погружение"></textarea></div>
+
+  <div class="q"><div class="n">14</div>
+    <label for="q14">Есть ли&nbsp;записи, где вы&nbsp;голосом разбираете учеников? Сколько примерно?</label>
+    <textarea id="q14" name="14. Записи разборов голосом"></textarea></div>
 </section>
 
 <section class="block">
   <h2>Блок 4. Как будем работать</h2>
-  <p class="hint">Скучный, но&nbsp;он экономит нервы потом.</p>
-  <ol start="15">
-    <li>Кто принимает финальные решения по&nbsp;проекту, кроме вас?</li>
-    <li>Ваш техлид&nbsp;— в&nbsp;какой роли он&nbsp;участвует и&nbsp;что согласовывается с&nbsp;ним?</li>
-    <li>В&nbsp;какие часы вам удобно созваниваться? Какой день недели стабильно свободен?</li>
-    <li>Какой канал связи для вас основной?</li>
-    <li>Работали раньше с&nbsp;подрядчиками на&nbsp;разработку? Что не&nbsp;понравилось?</li>
-    <li>Есть&nbsp;ли срок, который нельзя сдвинуть? Чем он&nbsp;вызван?</li>
-  </ol>
+  <p class="hint">Скучный, но&nbsp;он&nbsp;экономит нервы потом.</p>
+
+  <div class="q"><div class="n">15</div>
+    <label for="q15">Кто принимает финальные решения по&nbsp;проекту, кроме вас?</label>
+    <textarea id="q15" name="15. Кто принимает решения"></textarea></div>
+
+  <div class="q"><div class="n">16</div>
+    <label for="q16">Ваш техлид: в&nbsp;какой роли он&nbsp;участвует и&nbsp;что согласовывается с&nbsp;ним?</label>
+    <textarea id="q16" name="16. Роль техлида"></textarea></div>
+
+  <div class="q"><div class="n">17</div>
+    <label for="q17">В&nbsp;какие часы вам удобно созваниваться? Какой день недели стабильно свободен?</label>
+    <textarea id="q17" name="17. Удобное время"></textarea></div>
+
+  <div class="q"><div class="n">18</div>
+    <label for="q18">Какой канал связи для&nbsp;вас основной?</label>
+    <textarea id="q18" name="18. Основной канал связи"></textarea></div>
+
+  <div class="q"><div class="n">19</div>
+    <label for="q19">Работали раньше с&nbsp;подрядчиками на&nbsp;разработку? Что не&nbsp;понравилось?</label>
+    <textarea id="q19" name="19. Опыт с подрядчиками"></textarea></div>
+
+  <div class="q"><div class="n">20</div>
+    <label for="q20">Есть ли&nbsp;срок, который нельзя сдвинуть? Чем он&nbsp;вызван?</label>
+    <textarea id="q20" name="20. Жёсткий срок"></textarea></div>
 </section>
 
-<div class="last">
+<div class="dark-block">
   <h2>Блок 5. Опасения</h2>
-  <p class="hint">Самый важный блок. Отвечайте честно&nbsp;— это не&nbsp;проверка, это способ не&nbsp;наступить на&nbsp;то, что вам дорого.</p>
-  <ol start="21">
-    <li>Чего вы&nbsp;больше всего боитесь в&nbsp;этом проекте?</li>
-    <li>Что для вас будет означать «получилось»?</li>
-    <li>Что будет означать «не&nbsp;получилось»?</li>
-  </ol>
+  <p class="hint">Самый важный блок. Отвечайте честно: это не&nbsp;проверка, это способ не&nbsp;наступить на&nbsp;то, что вам дорого.</p>
+
+  <div class="q"><div class="n">21</div>
+    <label for="q21">Чего вы&nbsp;больше всего боитесь в&nbsp;этом проекте?</label>
+    <textarea id="q21" name="21. Главный страх"></textarea></div>
+
+  <div class="q"><div class="n">22</div>
+    <label for="q22">Что для&nbsp;вас будет означать «получилось»?</label>
+    <textarea id="q22" name="22. Что значит получилось"></textarea></div>
+
+  <div class="q"><div class="n">23</div>
+    <label for="q23">Что будет означать «не&nbsp;получилось»?</label>
+    <textarea id="q23" name="23. Что значит не получилось"></textarea></div>
+</div>
+
+<section class="block" style="border-top:0">
+  <button class="btn" type="submit">Отправить ответы</button>
+  <p class="saved" id="saved"></p>
+  <p class="hint">Если что-то не&nbsp;отправляется, просто напишите мне в&nbsp;мессенджер, разберёмся.</p>
+</section>
+
+</form>
+
+<div class="done" id="done" hidden>
+  <h2>Спасибо, ответы у&nbsp;меня</h2>
+  <p>Посчитаю объём и&nbsp;вернусь с&nbsp;расчётом. Если что-то захотите добавить, просто напишите мне в&nbsp;мессенджер.</p>
 </div>
 
 <footer>
-  Спасибо. После ваших ответов пришлю расчёт по&nbsp;объёму и&nbsp;предложу два времени для разговора на&nbsp;сорок минут.<br><br>
-  <strong>BULKI</strong> · студия бренд‑дизайна · Анна · <a href="mailto:bulkistudio@gmail.com" style="color:inherit">bulkistudio@gmail.com</a>
+  <strong>BULKI</strong> · студия бренд-дизайна · Анна · <a href="mailto:bulkistudio@gmail.com" style="color:inherit">bulkistudio@gmail.com</a>
 </footer>
 
 </div>
+
+<script>
+(function(){
+  var f = document.getElementById('f'),
+      saved = document.getElementById('saved'),
+      KEY = 'anketa-golovina', t = null;
+
+  // вернуть то, что было набрано раньше
+  try{
+    var was = JSON.parse(localStorage.getItem(KEY) || '{}');
+    Object.keys(was).forEach(function(k){
+      var el = f.elements[k]; if(el) el.value = was[k];
+    });
+    if(Object.keys(was).length) saved.textContent = 'Черновик восстановлен.';
+  }catch(e){}
+
+  function store(){
+    var d = {};
+    Array.prototype.forEach.call(f.elements, function(el){
+      if(el.name && el.value) d[el.name] = el.value;
+    });
+    try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){}
+    saved.textContent = 'Черновик сохранён на&nbsp;этом устройстве.';
+  }
+
+  f.addEventListener('input', function(){
+    clearTimeout(t); t = setTimeout(store, 600);
+  });
+
+  f.addEventListener('submit', function(e){
+    if(f.action.indexOf('ССЫЛКА') > -1){
+      e.preventDefault();
+      saved.textContent = 'Приём ответов ещё не&nbsp;подключён. Напишите Анне в&nbsp;мессенджер.';
+      return;
+    }
+    e.preventDefault();
+    fetch(f.action, {method:'POST', mode:'no-cors', body:new FormData(f)})
+      .then(function(){
+        try{ localStorage.removeItem(KEY); }catch(e){}
+        f.hidden = true;
+        document.getElementById('done').hidden = false;
+        window.scrollTo(0,0);
+      })
+      .catch(function(){
+        saved.textContent = 'Не&nbsp;получилось отправить. Ответы сохранены, попробуйте ещё раз или напишите Анне.';
+      });
+  });
+})();
+</script>
 </body>
 </html>
