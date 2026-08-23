@@ -20,9 +20,12 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+html,body{max-width:100%;overflow-x:hidden}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
   font-variant-numeric:tabular-nums}
+img{max-width:100%;height:auto}
+p,li,h1,h2,h3,td,th,.quote{overflow-wrap:break-word;word-break:normal}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
 section{padding:72px 0;border-bottom:1px solid var(--line)}
 h1,h2,h3{line-height:1.15;margin:0 0 18px;letter-spacing:-.02em;text-wrap:balance}
@@ -44,18 +47,28 @@ p{margin:0 0 16px;text-wrap:pretty}
 .cards{display:grid;gap:18px;grid-template-columns:1fr}
 @media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
-  padding:26px 24px;box-shadow:var(--shadow)}
-.num{display:inline-flex;align-items:center;justify-content:center;
+  padding:26px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+/* последняя строка карточки прижата вниз — три подписи стоят на одной линии */
+.card .tail{margin-top:auto;padding-top:14px}
+.num{display:inline-flex;align-self:flex-start;align-items:center;justify-content:center;
   width:34px;height:34px;border-radius:100px;background:var(--accent-soft);
   color:var(--accent);font-weight:700;font-size:15px;margin-bottom:14px}
 .card ul{margin:0;padding-left:18px}
 .card li{margin-bottom:7px;font-size:15px;color:var(--ink-soft)}
 
-table{width:100%;border-collapse:collapse;font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:15px;table-layout:fixed}
 th,td{text-align:left;padding:14px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
-td.n{white-space:nowrap;font-weight:600}
+th:first-child{width:60%}
+th:last-child,td.n{text-align:right}
+td.n{font-weight:600}
 .dark th,.dark td{border-bottom-color:var(--dark-line)}
+/* на узких экранах таблица не должна распирать страницу */
+@media(max-width:420px){
+  table{font-size:14px}
+  th,td{padding:12px 4px}
+  th{font-size:11px;letter-spacing:.02em}
+}
 
 .quote{font-size:clamp(21px,3.4vw,30px);font-weight:600;line-height:1.3;
   max-width:22ch;margin:0 0 20px}
@@ -65,7 +78,8 @@ td.n{white-space:nowrap;font-weight:600}
 .steps li::before{content:"—";position:absolute;left:0;color:var(--accent);font-weight:700}
 .btn{display:inline-block;padding:16px 32px;border-radius:100px;background:var(--accent);
   color:#fff;text-decoration:none;font-weight:600;font-size:16px}
-.foot{padding:36px 0;font-size:14px;color:var(--ink-soft)}
+/* padding-shorthand здесь затирал боковые отступы .wrap — подвал уезжал к краю */
+.foot{padding-top:36px;padding-bottom:36px;font-size:14px;color:var(--ink-soft)}
 .foot a{color:var(--ink-soft)}
 .badge{display:inline-block;padding:5px 12px;border-radius:100px;
   background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600}
@@ -88,19 +102,19 @@ body:not(.with-prices) .prices{display:none}
 <section>
   <div class="wrap">
     <img class="logo" src="logo.png" alt="BULKI — студия бренд‑дизайна">
-    <div class="eyebrow">для Ольги Головиной‑Панкрашиной</div>
-    <h1>Приложение для вашей студии: путь от идеи до денег инвестора</h1>
-    <p class="lead">Как показать инвестору работающий продукт, не собирая его целиком.</p>
+    <div class="eyebrow">для&nbsp;Ольги Головиной‑Панкрашиной</div>
+    <h1>Приложение для&nbsp;вашей студии: путь от&nbsp;идеи до&nbsp;денег инвестора</h1>
+    <p class="lead">Как показать инвестору работающий продукт, не&nbsp;собирая его целиком.</p>
   </div>
 </section>
 
 <!-- ② ПОНИМАНИЕ ЗАДАЧИ -->
 <section>
   <div class="wrap">
-    <div class="eyebrow">Что я поняла из ваших материалов</div>
-    <h2>Задача не в приложении</h2>
-    <p>Я прочитала письмо инвестору и презентацию. У&nbsp;вас есть методика на&nbsp;тридцать лет практики, пятнадцать лет работающая студия, две книги и&nbsp;зарегистрированное имя.</p>
-    <p>Не&nbsp;хватает одного&nbsp;— того, что можно открыть и&nbsp;потрогать. Площадка называет это MVP, ваш техлид справедливо отвечает, что в&nbsp;мобильной разработке это уже полноценный продукт. Оба правы, но&nbsp;говорят о&nbsp;разном.</p>
+    <div class="eyebrow">Что я&nbsp;поняла из&nbsp;ваших материалов</div>
+    <h2>Задача не&nbsp;в&nbsp;приложении</h2>
+    <p>Я&nbsp;прочитала письмо инвестору и&nbsp;презентацию. У&nbsp;вас есть методика на&nbsp;тридцать лет практики, пятнадцать лет работающая студия, две книги и&nbsp;зарегистрированное имя.</p>
+    <p>Не&nbsp;хватает одного: того, что можно открыть и&nbsp;потрогать. Площадка называет это MVP, ваш техлид справедливо отвечает, что в&nbsp;мобильной разработке это уже полноценный продукт. Оба правы, но&nbsp;говорят о&nbsp;разном.</p>
   </div>
 </section>
 
@@ -116,9 +130,9 @@ body:not(.with-prices) .prices{display:none}
 <!-- ④ ТРИ ШАГА -->
 <section>
   <div class="wrap">
-    <div class="eyebrow">Как я предлагаю идти</div>
+    <div class="eyebrow">Как я&nbsp;предлагаю идти</div>
     <h2>Три шага, каждый продаётся отдельно</h2>
-    <p class="lead" style="margin-bottom:36px">После каждого шага вы сами решаете, идём&nbsp;ли дальше.</p>
+    <p class="lead" style="margin-bottom:36px">После каждого шага вы&nbsp;сами решаете, идём&nbsp;ли дальше.</p>
 
     <div class="cards">
       <div class="card">
@@ -129,7 +143,7 @@ body:not(.with-prices) .prices{display:none}
           <li>Проверяю на&nbsp;пяти живых телефонах, слышит&nbsp;ли программа голос точно</li>
           <li>Собираю задание и&nbsp;макеты экранов</li>
         </ul>
-        <p class="small muted" style="margin:14px 0 0">Результат остаётся у&nbsp;вас в&nbsp;любом случае.</p>
+        <p class="small muted tail">Результат остаётся у&nbsp;вас в&nbsp;любом случае.</p>
       </div>
 
       <div class="card">
@@ -140,18 +154,18 @@ body:not(.with-prices) .prices{display:none}
           <li>Публикация во&nbsp;все четыре канала по&nbsp;расписанию</li>
           <li>Тексты и&nbsp;сценарии на&nbsp;месяц вперёд</li>
         </ul>
-        <p class="small muted" style="margin:14px 0 0">Единственный шаг, который приносит деньги сразу.</p>
+        <p class="small muted tail">Единственный шаг, который приносит деньги сразу.</p>
       </div>
 
       <div class="card">
         <div class="num">3</div>
-        <h3>Демо для инвестора</h3>
+        <h3>Демо для&nbsp;инвестора</h3>
         <ul>
           <li>Ссылка, которая открывается с&nbsp;любого телефона</li>
           <li>Спел&nbsp;→ увидел свой диапазон и&nbsp;точность&nbsp;→ получил разбор</li>
           <li>Разбор звучит вашими словами</li>
         </ul>
-        <p class="small muted" style="margin:14px 0 0">То, за&nbsp;чем вы&nbsp;пришли.</p>
+        <p class="small muted tail">То, за&nbsp;чем вы&nbsp;пришли.</p>
       </div>
     </div>
   </div>
@@ -160,11 +174,11 @@ body:not(.with-prices) .prices{display:none}
 <!-- ⑤ ЧТО УЖЕ ПРОВЕРЕНО -->
 <section>
   <div class="wrap">
-    <div class="eyebrow">Про меня честно</div>
-    <h2>Что у&nbsp;меня уже работает</h2>
-    <p>Я&nbsp;построила систему ИИ‑помощников для собственной студии. Она ведёт переписку с&nbsp;командой, помнит контекст по&nbsp;каждому человеку, сама собирает еженедельные отчёты и&nbsp;следит за&nbsp;расходами. Работает непрерывно с&nbsp;начала августа&nbsp;— покажу на&nbsp;экране.</p>
-    <p><span class="badge">Приложений в&nbsp;портфолио пока нет</span></p>
-    <p class="muted">Этот проект будет первым такого масштаба. Поэтому цена в&nbsp;разы ниже той, что называют студии, и&nbsp;поэтому оплата идёт по&nbsp;шагам: вы&nbsp;видите результат и&nbsp;только потом решаете, продолжать&nbsp;ли.</p>
+    <div class="eyebrow">Почему я</div>
+    <h2>Такую систему я&nbsp;уже построила. Себе</h2>
+    <p>В&nbsp;моей студии работает помощник на&nbsp;искусственном интеллекте. Он&nbsp;ведёт переписку с&nbsp;людьми в&nbsp;мессенджере, помнит, о&nbsp;чём говорили в&nbsp;прошлый раз с&nbsp;каждым, сам собирает отчёты за&nbsp;неделю и&nbsp;следит за&nbsp;расходами на&nbsp;сервисы. Я&nbsp;его собрала, я&nbsp;его и&nbsp;обслуживаю. Он&nbsp;работает без&nbsp;остановки с&nbsp;начала августа.</p>
+    <p>Ваш будущий наставник в&nbsp;приложении собирается ровно из&nbsp;тех&nbsp;же деталей: помнить прошлый урок, разобрать сегодняшний, вовремя напомнить о&nbsp;занятии. Отличие в&nbsp;одном: говорить он&nbsp;будет вашими словами и&nbsp;про голос.</p>
+    <p class="muted">Больших приложений в&nbsp;моём портфолио пока нет, ваш проект будет первым. Поэтому цена в&nbsp;разы ниже той, что называют студии, и&nbsp;поэтому оплата идёт по&nbsp;шагам: вы&nbsp;смотрите на&nbsp;готовый результат и&nbsp;только потом решаете, продолжать&nbsp;ли.</p>
   </div>
 </section>
 
@@ -175,12 +189,12 @@ body:not(.with-prices) .prices{display:none}
     <h2>Первый результат&nbsp;— через две недели после старта</h2>
     <table>
       <tr><th>Шаг</th><th>Сколько занимает</th></tr>
-      <tr><td>1. Разведка</td><td class="n">1,5–2 недели</td></tr>
-      <tr><td>2. Донабор в&nbsp;студию</td><td class="n">2–3 недели</td></tr>
-      <tr><td>3. Демо для инвестора</td><td class="n">4–6 недель</td></tr>
-      <tr><td><strong>Все три шага</strong></td><td class="n"><strong>около 3 месяцев</strong></td></tr>
+      <tr><td>1. Разведка</td><td class="n">1,5–2&nbsp;недели</td></tr>
+      <tr><td>2. Донабор в&nbsp;студию</td><td class="n">2–3&nbsp;недели</td></tr>
+      <tr><td>3. Демо для&nbsp;инвестора</td><td class="n">4–6&nbsp;недель</td></tr>
+      <tr><td><strong>Все три шага</strong></td><td class="n"><strong>около 3&nbsp;месяцев</strong></td></tr>
     </table>
-    <p class="muted small" style="margin-top:18px">Шаг&nbsp;2 можно начать, пока идут согласования по&nbsp;шагу&nbsp;1. Сроки продлеваются на&nbsp;время ожидания материалов и&nbsp;согласований с&nbsp;вашей стороны&nbsp;— поэтому чем быстрее отвечаете, тем раньше сдаю.</p>
+    <p class="muted small" style="margin-top:18px">Шаг&nbsp;2&nbsp;можно начать, пока идут согласования по&nbsp;шагу&nbsp;1. Сроки продлеваются на&nbsp;время ожидания материалов и&nbsp;согласований с&nbsp;вашей стороны, поэтому чем быстрее отвечаете, тем раньше сдаю.</p>
   </div>
 </section>
 
@@ -191,9 +205,9 @@ body:not(.with-prices) .prices{display:none}
     <h2>Оплата по&nbsp;шагам</h2>
     <table>
       <tr><th>Шаг</th><th>Стоимость</th></tr>
-      <tr><td>1. Разведка</td><td class="n">25 000&nbsp;₽</td></tr>
-      <tr><td>2. Донабор в&nbsp;студию</td><td class="n">45 000&nbsp;₽</td></tr>
-      <tr><td>3. Демо для инвестора</td><td class="n">от 120 000&nbsp;₽</td></tr>
+      <tr><td>1. Разведка</td><td class="n">25&nbsp;000&nbsp;₽</td></tr>
+      <tr><td>2. Донабор в&nbsp;студию</td><td class="n">45&nbsp;000&nbsp;₽</td></tr>
+      <tr><td>3. Демо для&nbsp;инвестора</td><td class="n">от&nbsp;120&nbsp;000&nbsp;₽</td></tr>
     </table>
     <p style="margin-top:22px"><strong>Точную цену третьего шага я&nbsp;назову после разведки.</strong> До&nbsp;проверки на&nbsp;живых телефонах никто честно не&nbsp;знает, насколько точно программа услышит голос через дешёвый микрофон. Называть цифру за&nbsp;непроверенное&nbsp;— это ровно то, за&nbsp;что потом платят переносами сроков.</p>
     <p class="muted small">Расходы на&nbsp;домен, хостинг и&nbsp;сервисы&nbsp;— отдельно, по&nbsp;счетам, оформляются на&nbsp;вас. Ориентировочно 5–15&nbsp;тысяч&nbsp;₽ в&nbsp;месяц.</p>
@@ -203,7 +217,7 @@ body:not(.with-prices) .prices{display:none}
 <!-- ⑧ КАК МЫ РАБОТАЕМ — тёмный экран -->
 <section class="dark">
   <div class="wrap">
-    <div class="eyebrow">Как мы работаем</div>
+    <div class="eyebrow">Как мы&nbsp;работаем</div>
     <h2>Пять правил, которые защищают обеих</h2>
     <ul class="steps">
       <li>Договор и&nbsp;задание письменно. Чего нет в&nbsp;задании&nbsp;— того нет в&nbsp;работе</li>
@@ -221,11 +235,11 @@ body:not(.with-prices) .prices{display:none}
   <div class="wrap">
     <div class="eyebrow">Следующий шаг</div>
     <h2>Анкета вместо созвона</h2>
-    <p class="lead">Мне нужно задать вопросы по&nbsp;методике и&nbsp;материалам&nbsp;— без этого я&nbsp;не&nbsp;посчитаю объём точно. Но&nbsp;для этого не&nbsp;обязательно созваниваться.</p>
-    <p>Анкета&nbsp;— минут на&nbsp;десять. Отвечать можно текстом или голосовыми, когда будет удобно, хоть по&nbsp;одному вопросу в&nbsp;день. Из&nbsp;ваших ответов я&nbsp;соберу точный объём первого шага.</p>
-    <p>До&nbsp;7&nbsp;сентября я&nbsp;в&nbsp;отъезде: на&nbsp;связи текстом и&nbsp;голосовыми каждый день, созвоны не&nbsp;ставлю. <strong>Работа по&nbsp;первому шагу стартует 7&nbsp;сентября</strong>&nbsp;— эти две недели уходят на&nbsp;анкету и&nbsp;сбор материалов с&nbsp;вашей стороны, так что мы&nbsp;ничего не&nbsp;теряем.</p>
+    <p class="lead">Мне нужно задать вопросы по&nbsp;методике и&nbsp;материалам, иначе я&nbsp;не&nbsp;посчитаю объём точно. Но&nbsp;созваниваться для&nbsp;этого не&nbsp;обязательно.</p>
+    <p>Анкета займёт минут десять. Отвечать можно текстом или голосовыми, когда будет удобно, хоть по&nbsp;одному вопросу в&nbsp;день. Из&nbsp;ваших ответов я&nbsp;соберу точный объём первого шага.</p>
+    <p>До&nbsp;7&nbsp;сентября я&nbsp;в&nbsp;отъезде: на&nbsp;связи текстом и&nbsp;голосовыми каждый день, созвоны не&nbsp;ставлю. <strong>Работа по&nbsp;первому шагу стартует 7&nbsp;сентября.</strong> Эти две недели уходят на&nbsp;анкету и&nbsp;сбор материалов с&nbsp;вашей стороны, так что мы&nbsp;ничего не&nbsp;теряем.</p>
     <p style="margin-top:28px"><a class="btn" href="./anketa.html">Заполнить анкету</a></p>
-    <p class="small muted">Если созвон всё&nbsp;же нужен&nbsp;— поставим после 7&nbsp;сентября. Начинать он&nbsp;не&nbsp;мешает.</p>
+    <p class="small muted">Если созвон всё&nbsp;же нужен, поставим его после 7&nbsp;сентября. Начинать он&nbsp;не&nbsp;мешает.</p>
   </div>
 </section>
 
