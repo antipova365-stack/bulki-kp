@@ -91,8 +91,13 @@ td.n{font-weight:600}
 body:not(.with-prices) .prices{display:none}
 
 /* логотип-шапка */
-.logo{display:block;width:200px;height:auto;margin:0 0 26px -10px}
-@media(max-width:600px){.logo{width:158px;margin-left:-8px}}
+.logo{display:block;width:250px;height:auto;margin:0 auto 24px;
+  transform:translateX(-2.2%)}  /* краска в файле смещена вправо на 2,2% */
+@media(max-width:600px){.logo{width:200px}}
+
+/* первый экран — по центру */
+.hero{text-align:center}
+.hero .lead{margin-left:auto;margin-right:auto}
 </style>
 </head>
 
@@ -100,7 +105,7 @@ body:not(.with-prices) .prices{display:none}
 
 <!-- ① ЗАГОЛОВОК -->
 <section>
-  <div class="wrap">
+  <div class="wrap hero">
     <img class="logo" src="logo.png" alt="BULKI — студия бренд‑дизайна">
     <div class="eyebrow">для&nbsp;Ольги Головиной‑Панкрашиной</div>
     <h1>Приложение для&nbsp;вашей студии: путь от&nbsp;идеи до&nbsp;денег инвестора</h1>
