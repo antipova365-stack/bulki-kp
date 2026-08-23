@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Несколько вопросов перед началом — студия BULKI</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F1E6; --surface:#FFFFFF; --ink:#241A12; --ink-soft:#6E6255;
+  --line:#E6DACB; --accent:#BE6A2F; --accent-soft:#F1E1CC;
+  --dark-bg:#1E140D; --dark-ink:#F3E9D8;
+  --r:16px; --shadow:0 14px 44px rgba(36,26,18,.10);
+  --font:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 22px}
+header{padding:56px 0 40px}
+h1{font-size:clamp(28px,5.4vw,42px);font-weight:700;line-height:1.15;
+  letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
+.lead{font-size:clamp(17px,2.4vw,20px);color:var(--ink-soft);max-width:54ch;margin:0 0 14px}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin-bottom:14px}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px 24px;box-shadow:var(--shadow);margin:28px 0 8px}
+.note p{margin:0 0 10px}
+.note p:last-child{margin:0}
+.block{padding:34px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(20px,3vw,26px);font-weight:650;letter-spacing:-.01em;margin:0 0 6px}
+.hint{color:var(--ink-soft);font-size:15px;margin:0 0 20px}
+ol{counter-reset:q;list-style:none;margin:0;padding:0}
+ol li{counter-increment:q;position:relative;padding:0 0 20px 48px;margin:0}
+ol li::before{content:counter(q);position:absolute;left:0;top:1px;
+  width:32px;height:32px;border-radius:100px;background:var(--accent-soft);
+  color:var(--accent);font-weight:700;font-size:14px;
+  display:flex;align-items:center;justify-content:center}
+ol li .sub{display:block;color:var(--ink-soft);font-size:15px;margin-top:4px}
+.last{background:var(--dark-bg);color:var(--dark-ink);border-radius:var(--r);
+  padding:34px 28px;margin:40px 0}
+.last h2{margin-bottom:8px}
+.last .hint{color:#B9A98C}
+.last ol li::before{background:#3B2C1F;color:#D89358}
+footer{padding:38px 0 56px;color:var(--ink-soft);font-size:14px;border-top:1px solid var(--line)}
+
+.logo{display:block;width:170px;height:auto;margin:0 0 22px -8px}
+@media(max-width:600px){.logo{width:140px;margin-left:-6px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <img class="logo" src="logo.png" alt="BULKI — студия бренд‑дизайна">
+  <div class="eyebrow">для Ольги Головиной‑Панкрашиной</div>
+  <h1>Несколько вопросов перед тем, как считать</h1>
+  <p class="lead">Двадцать три коротких вопроса. Займут минут десять&nbsp;— и&nbsp;сэкономят нам обеим целый созвон.</p>
+
+  <div class="note">
+    <p><b>Отвечать можно как удобно:</b> текстом, голосовыми, хоть по&nbsp;одному вопросу в&nbsp;день. Ответы «не&nbsp;знаю» и&nbsp;«надо уточнить»&nbsp;— нормальные ответы, они мне тоже говорят многое.</p>
+    <p>Если на&nbsp;какой‑то вопрос отвечать не&nbsp;хочется&nbsp;— пропустите, обсудим голосом.</p>
+    <p class="hint" style="margin-top:14px">Зачем это нужно: без ответов на&nbsp;блоки&nbsp;2 и&nbsp;3 я&nbsp;не&nbsp;смогу назвать честную цену&nbsp;— только угадать. А&nbsp;угаданная цена всегда потом растёт.</p>
+  </div>
+</header>
+
+<section class="block">
+  <h2>Блок 1. Продукт и цель</h2>
+  <p class="hint">Про то, ради чего всё это.</p>
+  <ol>
+    <li>Что должно измениться в&nbsp;вашей студии через полгода после запуска?</li>
+    <li>Приложение&nbsp;— для существующих учеников или для новых?</li>
+    <li>Сколько учеников сейчас и&nbsp;сколько хотите?</li>
+    <li>Что ученик должен сделать в&nbsp;приложении в&nbsp;первый день?</li>
+    <li>Если бы можно было сделать <b>только одну</b> функцию&nbsp;— какую?</li>
+  </ol>
+</section>
+
+<section class="block">
+  <h2>Блок 2. Деньги</h2>
+  <p class="hint">Самый важный блок для расчёта. Отвечайте прямо, я&nbsp;не&nbsp;буду подстраивать цену под цифру&nbsp;— я&nbsp;подберу под неё объём.</p>
+  <ol start="6">
+    <li>Какая вилка бюджета на&nbsp;проект вам комфортна?</li>
+    <li>Оплата из&nbsp;текущей выручки студии или из&nbsp;привлечённых инвестиций?</li>
+    <li>Если инвестор не&nbsp;придёт в&nbsp;ближайшие три месяца&nbsp;— проект продолжается?</li>
+    <li>Какой платёжный сервис уже подключён? Подключены&nbsp;ли автоматические списания по&nbsp;подписке?
+      <span class="sub">Если не&nbsp;знаете&nbsp;— так и&nbsp;напишите, спрошу у&nbsp;вашего бухгалтера.</span></li>
+    <li>Кто ваш бухгалтер и&nbsp;юрист, с&nbsp;кем можно решать вопросы по&nbsp;чекам и&nbsp;договору?</li>
+  </ol>
+</section>
+
+<section class="block">
+  <h2>Блок 3. Материалы и права</h2>
+  <p class="hint">Вопрос&nbsp;11&nbsp;— критичный. От&nbsp;ответа зависит, можно&nbsp;ли вообще использовать ваши книги.</p>
+  <ol start="11">
+    <li>Книги вышли в&nbsp;издательстве или самостоятельно? Есть&nbsp;ли договор с&nbsp;издательством?
+      <span class="sub">Если через издательство&nbsp;— нужна копия договора: права на&nbsp;текст могли перейти к&nbsp;нему, и&nbsp;тогда обучать на&nbsp;книгах нельзя.</span></li>
+    <li>Какие материалы уже готовы: тексты, видео, упражнения, разборы?</li>
+    <li>Сколько часов вы&nbsp;готовы уделить погружению? <span class="sub">Мне нужно 6–10&nbsp;часов, разбитых на&nbsp;четыре встречи.</span></li>
+    <li>Есть&nbsp;ли записи, где вы&nbsp;голосом разбираете учеников? Сколько примерно?</li>
+  </ol>
+</section>
+
+<section class="block">
+  <h2>Блок 4. Как будем работать</h2>
+  <p class="hint">Скучный, но&nbsp;он экономит нервы потом.</p>
+  <ol start="15">
+    <li>Кто принимает финальные решения по&nbsp;проекту, кроме вас?</li>
+    <li>Ваш техлид&nbsp;— в&nbsp;какой роли он&nbsp;участвует и&nbsp;что согласовывается с&nbsp;ним?</li>
+    <li>В&nbsp;какие часы вам удобно созваниваться? Какой день недели стабильно свободен?</li>
+    <li>Какой канал связи для вас основной?</li>
+    <li>Работали раньше с&nbsp;подрядчиками на&nbsp;разработку? Что не&nbsp;понравилось?</li>
+    <li>Есть&nbsp;ли срок, который нельзя сдвинуть? Чем он&nbsp;вызван?</li>
+  </ol>
+</section>
+
+<div class="last">
+  <h2>Блок 5. Опасения</h2>
+  <p class="hint">Самый важный блок. Отвечайте честно&nbsp;— это не&nbsp;проверка, это способ не&nbsp;наступить на&nbsp;то, что вам дорого.</p>
+  <ol start="21">
+    <li>Чего вы&nbsp;больше всего боитесь в&nbsp;этом проекте?</li>
+    <li>Что для вас будет означать «получилось»?</li>
+    <li>Что будет означать «не&nbsp;получилось»?</li>
+  </ol>
+</div>
+
+<footer>
+  Спасибо. После ваших ответов пришлю расчёт по&nbsp;объёму и&nbsp;предложу два времени для разговора на&nbsp;сорок минут.<br><br>
+  <strong>BULKI</strong> · студия бренд‑дизайна · Анна · <a href="mailto:bulkistudio@gmail.com" style="color:inherit">bulkistudio@gmail.com</a>
+</footer>
+
+</div>
+</body>
+</html>
