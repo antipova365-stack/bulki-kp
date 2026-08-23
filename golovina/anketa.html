@@ -70,7 +70,8 @@ textarea:focus,input[type=text]:focus{outline:2px solid var(--accent);outline-of
   padding:28px 26px;box-shadow:var(--shadow);margin:20px 0}
 .done h2{margin-bottom:8px}
 footer{padding:38px 0 56px;color:var(--ink-soft);font-size:14px;border-top:1px solid var(--line)}
-.logo{display:block;width:250px;height:auto;margin:0 0 24px}
+.logo{display:block;width:250px;height:auto;margin:0 0 24px;
+  transform:translateX(-2.2%)}  /* краска в файле смещена вправо на 2,2% */
 @media(max-width:600px){.logo{width:200px}}
 </style>
 </head>
@@ -85,26 +86,13 @@ footer{padding:38px 0 56px;color:var(--ink-soft);font-size:14px;border-top:1px s
   <p class="lead">Двадцать три коротких вопроса. Займут минут десять и&nbsp;сэкономят нам обеим целый созвон.</p>
 
   <div class="note">
-    <p><b>Заполнять можно не&nbsp;за&nbsp;раз.</b> Ответы сохраняются прямо в&nbsp;вашем телефоне: можно закрыть страницу, вернуться завтра и&nbsp;продолжить с&nbsp;того же&nbsp;места. Отправится всё одной кнопкой в&nbsp;самом низу.</p>
+    <p><b>Заполнять можно не&nbsp;за&nbsp;раз.</b><br>Ответы сохраняются прямо в&nbsp;вашем телефоне: можно закрыть страницу, вернуться завтра и&nbsp;продолжить с&nbsp;того же&nbsp;места. В&nbsp;конце одна кнопка соберёт все ответы в&nbsp;сообщение, останется вставить его в&nbsp;наш чат.</p>
     <p>Ответы «не&nbsp;знаю» и&nbsp;«надо уточнить»&nbsp;— нормальные ответы, они мне тоже говорят многое. Если на&nbsp;какой-то вопрос отвечать не&nbsp;хочется, оставьте поле пустым, обсудим голосом.</p>
     <p class="hint" style="margin-top:14px">Зачем это нужно: без&nbsp;ответов на&nbsp;блоки 2&nbsp;и&nbsp;3&nbsp;я&nbsp;не&nbsp;смогу назвать честную цену, только угадать. А&nbsp;угаданная цена всегда потом растёт.</p>
   </div>
 </header>
 
-<form id="f" method="post" action="ССЫЛКА_НА_ПРИЁМНИК_ОТВЕТОВ">
-
-<section class="block">
-  <h2>Как с&nbsp;вами связаться</h2>
-  <p class="hint">Чтобы я&nbsp;знала, куда прислать расчёт.</p>
-  <div class="q">
-    <label for="c1">Имя</label>
-    <input type="text" id="c1" name="Имя" autocomplete="name">
-  </div>
-  <div class="q">
-    <label for="c2">Телефон, почта или ник в&nbsp;мессенджере</label>
-    <input type="text" id="c2" name="Контакт">
-  </div>
-</section>
+<form id="f">
 
 <section class="block">
   <h2>Блок 1. Продукт и&nbsp;цель</h2>
@@ -227,11 +215,13 @@ footer{padding:38px 0 56px;color:var(--ink-soft);font-size:14px;border-top:1px s
 </div>
 
 <section class="block" style="border-top:0">
-  <button class="btn" type="submit">Отправить ответы</button>
+  <h2>Готово?</h2>
+  <p class="hint">Нажмите кнопку: все ответы соберутся в&nbsp;одно сообщение. Останется вставить его в&nbsp;наш чат и&nbsp;отправить.</p>
+  <button class="btn" type="button" id="copy">Скопировать ответы</button>
   <p class="saved" id="saved"></p>
-  <p class="hint">Если что-то не&nbsp;отправляется, просто напишите мне в&nbsp;мессенджер, разберёмся.</p>
+  <p class="hint" style="margin-top:18px">Не&nbsp;получилось скопировать? <a href="#" id="mail" style="color:var(--accent)">Отправьте письмом</a>, или просто перескажите голосовыми, так тоже нормально.</p>
+  <textarea id="out" hidden style="min-height:220px;margin-top:16px"></textarea>
 </section>
-
 </form>
 
 <div class="done" id="done" hidden>
@@ -247,49 +237,56 @@ footer{padding:38px 0 56px;color:var(--ink-soft);font-size:14px;border-top:1px s
 
 <script>
 (function(){
-  var f = document.getElementById('f'),
-      saved = document.getElementById('saved'),
-      KEY = 'anketa-golovina', t = null;
+  var f=document.getElementById('f'), saved=document.getElementById('saved'),
+      out=document.getElementById('out'), KEY='anketa-golovina', t=null;
 
-  // вернуть то, что было набрано раньше
+  // вернуть набранное раньше
   try{
-    var was = JSON.parse(localStorage.getItem(KEY) || '{}');
-    Object.keys(was).forEach(function(k){
-      var el = f.elements[k]; if(el) el.value = was[k];
-    });
-    if(Object.keys(was).length) saved.textContent = 'Черновик восстановлен.';
+    var was=JSON.parse(localStorage.getItem(KEY)||'{}');
+    Object.keys(was).forEach(function(k){ var el=f.elements[k]; if(el) el.value=was[k]; });
+    if(Object.keys(was).length) saved.textContent='Черновик восстановлен.';
   }catch(e){}
 
   function store(){
-    var d = {};
+    var d={};
     Array.prototype.forEach.call(f.elements, function(el){
-      if(el.name && el.value) d[el.name] = el.value;
+      if(el.name && el.value.trim()) d[el.name]=el.value;
     });
     try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){}
-    saved.textContent = 'Черновик сохранён на&nbsp;этом устройстве.';
+    saved.textContent='Черновик сохранён на этом устройстве.';
+  }
+  f.addEventListener('input', function(){ clearTimeout(t); t=setTimeout(store,600); });
+
+  function collect(){
+    var lines=['Анкета для студии BULKI. Ответы Ольги Головиной-Панкрашиной',''];
+    Array.prototype.forEach.call(f.elements, function(el){
+      if(el.name && el.value.trim()){ lines.push(el.name, el.value.trim(), ''); }
+    });
+    if(lines.length<3) return null;
+    return lines.join('\n');
   }
 
-  f.addEventListener('input', function(){
-    clearTimeout(t); t = setTimeout(store, 600);
+  document.getElementById('copy').addEventListener('click', function(){
+    var text=collect();
+    if(!text){ saved.textContent='Пока ничего не заполнено.'; return; }
+    function manual(){
+      out.hidden=false; out.value=text; out.focus(); out.select();
+      saved.textContent='Скопируйте текст из поля ниже и вставьте в наш чат.';
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        saved.textContent='Скопировано. Вставьте в наш чат и отправьте.';
+      }).catch(manual);
+    } else { manual(); }
   });
 
-  f.addEventListener('submit', function(e){
-    if(f.action.indexOf('ССЫЛКА') > -1){
-      e.preventDefault();
-      saved.textContent = 'Приём ответов ещё не&nbsp;подключён. Напишите Анне в&nbsp;мессенджер.';
-      return;
-    }
+  document.getElementById('mail').addEventListener('click', function(e){
     e.preventDefault();
-    fetch(f.action, {method:'POST', mode:'no-cors', body:new FormData(f)})
-      .then(function(){
-        try{ localStorage.removeItem(KEY); }catch(e){}
-        f.hidden = true;
-        document.getElementById('done').hidden = false;
-        window.scrollTo(0,0);
-      })
-      .catch(function(){
-        saved.textContent = 'Не&nbsp;получилось отправить. Ответы сохранены, попробуйте ещё раз или напишите Анне.';
-      });
+    var text=collect();
+    if(!text){ saved.textContent='Пока ничего не заполнено.'; return; }
+    location.href='mailto:bulkistudio@gmail.com?subject='
+      + encodeURIComponent('Анкета — Ольга Головина-Панкрашина')
+      + '&body=' + encodeURIComponent(text);
   });
 })();
 </script>
